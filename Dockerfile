@@ -52,10 +52,6 @@ RUN ln -sf /proc/1/fd/1 /var/log/valkey/valkey.log && \
 ADD healthcheck.sh /healthcheck.sh
 RUN chmod +x /healthcheck.sh
 
-RUN mkdir /etc/redis && \
-    mkdir var/log/redis && \
-    touch -a /var/log/redis/redis-server.log
-ADD conf/redis.conf /etc/redis/redis.conf
 
 HEALTHCHECK --start-period=1m --interval=30s --timeout=5s --retries=2 CMD /healthcheck.sh
 
