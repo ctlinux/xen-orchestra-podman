@@ -31,7 +31,11 @@ MAINTAINER Bill Schouten <bschouten@ctlinux.com>
 RUN dnf install -y dnf-plugins-core epel-release epel-next-release && \
     dnf copr enable -y areiter/fedora-epel-extra && \
     dnf update -y && \
-    dnf install -y valkey-compat-redis libvhdi python3 python3-jinja2 lvm2 nfs-utils cifs-utils ca-certificates monit procps-ng npm ntfs-3g
+    dnf install -y valkey-compat-redis libvhdi python3 python3-jinja2 lvm2 nfs-utils cifs-utils ca-certificates monit procps-ng ntfs-3g fuse-libs
+
+RUN dnf module reset nodejs && \
+    dnf module enable -y nodejs:18 && \
+    dnf module install -y nodejs:18/common
 
 # Install forever for starting/stopping Xen-Orchestra
 RUN npm install forever -g
@@ -47,13 +51,21 @@ RUN ln -sf /proc/1/fd/1 /var/log/valkey/valkey.log && \
 # Healthcheck
 ADD healthcheck.sh /healthcheck.sh
 RUN chmod +x /healthcheck.sh
+
+RUN mkdir /etc/redis && \
+    mkdir var/log/redis && \
+    touch -a /var/log/redis/redis-server.log
+ADD conf/redis.conf /etc/redis/redis.conf
+
 HEALTHCHECK --start-period=1m --interval=30s --timeout=5s --retries=2 CMD /healthcheck.sh
 
 # Copy xo-server configuration template
 ADD conf/xo-server.toml.j2 /xo-server.toml.j2
 
 # Copy monit configuration
-ADD conf/monit-services /etc/monit/conf.d/services
+ADD conf/monit-services /etc/monit.d/services
+
+RUN echo "include /etc/monit.d/*" > /etc/monitrc
 
 # Copy startup script
 ADD run.sh /run.sh
