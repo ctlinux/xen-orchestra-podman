@@ -8,13 +8,13 @@ Xen-Orchestra is a Web-UI for managing your existing XenServer infrastructure.
 
 https://xen-orchestra.com/
 
-Xen-Orchestra offers supported version of their product in an appliance (not running docker though), which i highly recommend if you are working with larger infrastructure.
+Xen-Orchestra offers supported version of their product in an appliance (not running docker though), which is highly recommend if you are working with larger infrastructure.
 
 #### Installation
 
 - Clone this repository
 ```
-git clone https://github.com/ctlinux/xen-orchestra-docker
+git clone https://github.com/ctlinux/xen-orchestra-podman
 ```
 
 - build docker container manually
