@@ -14,7 +14,7 @@ Xen-Orchestra offers supported version of their product in an appliance (not run
 
 - Clone this repository
 ```
-git clone https://github.com/ronivay/xen-orchestra-docker
+git clone https://github.com/ctlinux/xen-orchestra-docker
 ```
 
 - build docker container manually
@@ -26,13 +26,13 @@ docker build -t xen-orchestra .
 - or pull from dockerhub
 
 ```
-docker pull ronivay/xen-orchestra
+docker pull ctlinux/xen-orchestra
 ```
 
 - run it with defaults values for testing purposes. 
 
 ```
-docker run -itd -p 80:80 ronivay/xen-orchestra
+docker run -itd -p 80:80 ctlinux/xen-orchestra
 ```
 
 Xen-Orchestra is now accessible at http://your-ip-address. Default credentials admin@admin.net/admin
@@ -40,7 +40,7 @@ Xen-Orchestra is now accessible at http://your-ip-address. Default credentials a
 - Other than testing, suggested method is to mount data paths from your host to preserve data
 
 ```
-docker run -itd -p 80:80 -v /path/to/data/xo-server:/var/lib/xo-server -v /path/to/data/redis:/var/lib/redis ronivay/xen-orchestra
+docker run -itd -p 80:80 -v /path/to/data/xo-server:/var/lib/xo-server -v /path/to/data/redis:/var/lib/redis ctlinux/xen-orchestra
 ```
 
 I also suggest adding --stop-timeout since there are multiple services inside single container and we want them to shutdown gracefully when container is stopped. 
@@ -69,7 +69,7 @@ docker run -itd \
   -p 80:80 \
   -v /path/to/data/xo-server:/var/lib/xo-server \
   -v /path/to/data/redis:/var/lib/redis \
-  ronivay/xen-orchestra
+  ctlinux/xen-orchestra
 
 ```
 
@@ -80,7 +80,7 @@ version: '3'
 services:
     xen-orchestra:
         restart: unless-stopped
-        image: ronivay/xen-orchestra:latest
+        image: ctlinux/xen-orchestra:latest
         container_name: xen-orchestra
         stop_grace_period: 1m
         ports:
