@@ -25,7 +25,10 @@ RUN find /etc/xen-orchestra/packages/ -maxdepth 1 -mindepth 1 -not -name "xo-ser
 # Runner container
 FROM quay.io/centos/centos:stream9
 
-MAINTAINER Bill Schouten <bschouten@ctlinux.com>
+LABEL   org.opencontainers.image.authors="Bill Schouten <bschouten@ctlinux.com>" \
+        org.opencontainers.image.source="https://github.com/ctlinux/xen-orchestra-podman" \
+        version="1.0"
+
 
 # Install set of dependencies for running Xen Orchestra
 RUN dnf install -y dnf-plugins-core epel-release epel-next-release && \

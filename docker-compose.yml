@@ -2,7 +2,7 @@ version: '3'
 services:
     xen-orchestra:
         restart: unless-stopped
-        image: ronivay/xen-orchestra:latest
+        image: ctlinux/xen-orchestra:latest
         container_name: xen-orchestra
         stop_grace_period: 1m
         ports:

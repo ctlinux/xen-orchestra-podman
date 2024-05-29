@@ -43,5 +43,5 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ronivay/xen-orchestra:latest
-            ronivay/xen-orchestra:${{ env.XO_VERSION }}
+            ctlinux/xen-orchestra:latest
+            ctlinux/xen-orchestra:${{ env.XO_VERSION }}
